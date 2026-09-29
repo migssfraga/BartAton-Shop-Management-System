@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1093166697373",
+    "project_id": "bartaton-shop",
+    "storage_bucket": "bartaton-shop.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1093166697373:android:9e5452d6f136759213fd74",
+        "android_client_info": {
+          "package_name": "com.example.bartaton_shop_system"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAiE5BRrhgkTVCYEw2NoCIoJi53E4f-ev8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
