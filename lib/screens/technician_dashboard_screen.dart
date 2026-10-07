@@ -64,6 +64,21 @@ class _TechnicianDashboardScreenState extends State<TechnicianDashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    int gridColumns = 2;
+    double cardAspectRatio = 1.4;
+
+    if (screenWidth >= 900) {
+      gridColumns = 4;
+      cardAspectRatio = 1.6;
+    } else if (screenWidth >= 600) {
+      gridColumns = 2;
+      cardAspectRatio = 1.7;
+    } else {
+      gridColumns = 2;
+      cardAspectRatio = 1.4;
+    }
+
     return Scaffold(
       key: _scaffoldKey,
       backgroundColor: const Color(0xFF02040A),
@@ -120,12 +135,12 @@ class _TechnicianDashboardScreenState extends State<TechnicianDashboardScreen> {
                 const SizedBox(height: 32),
                 
                 GridView.count(
-                  crossAxisCount: 2,
+                  crossAxisCount: gridColumns,
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   crossAxisSpacing: 14,
                   mainAxisSpacing: 14,
-                  childAspectRatio: 0.95,
+                  childAspectRatio: cardAspectRatio,
                   children: [
                     StatCard(icon: Icons.assignment, label: 'Assigned', value: '$_assignedCount', caption: 'Your jobs'),
                     StatCard(icon: Icons.access_time, label: 'Queue', value: '$_pendingCount', caption: 'Global pending'),

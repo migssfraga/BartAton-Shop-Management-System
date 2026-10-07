@@ -148,12 +148,14 @@ class _AdminReportsScreenState extends State<AdminReportsScreen> {
 
             // Key Metrics Summary
             GridView.count(
-              crossAxisCount: 2,
+              crossAxisCount: MediaQuery.of(context).size.width >= 600 ? 2 : 2,
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               crossAxisSpacing: 12,
               mainAxisSpacing: 12,
-              childAspectRatio: 1.1,
+              childAspectRatio: MediaQuery.of(context).size.width >= 900
+                  ? 3.0
+                  : (MediaQuery.of(context).size.width >= 600 ? 2.0 : 1.4),
               children: [
                 StatCard(
                   icon: Icons.trending_up,

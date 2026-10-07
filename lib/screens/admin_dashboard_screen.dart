@@ -106,6 +106,21 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    int gridColumns = 2;
+    double cardAspectRatio = 1.4;
+
+    if (screenWidth >= 1100) {
+      gridColumns = 6;
+      cardAspectRatio = 1.55;
+    } else if (screenWidth >= 700) {
+      gridColumns = 3;
+      cardAspectRatio = 1.65;
+    } else {
+      gridColumns = 2;
+      cardAspectRatio = 1.4;
+    }
+
     return Scaffold(
       key: _scaffoldKey,
       backgroundColor: const Color(0xFF02040A),
@@ -161,14 +176,14 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                 ),
                 const SizedBox(height: 32),
 
-                // KPI grid (Live from Firestore)
+                // KPI grid (Live from Firestore - Responsive layout)
                 GridView.count(
-                  crossAxisCount: 2,
+                  crossAxisCount: gridColumns,
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   crossAxisSpacing: 14,
                   mainAxisSpacing: 14,
-                  childAspectRatio: 0.95,
+                  childAspectRatio: cardAspectRatio,
                   children: [
                     StatCard(icon: Icons.calendar_today, label: 'Appointments', value: '$_appointmentCount', caption: 'Total jobs'),
                     StatCard(icon: Icons.local_shipping, label: 'Active Rentals', value: '$_activeRentalsCount', caption: 'In progress'),

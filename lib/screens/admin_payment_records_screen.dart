@@ -112,12 +112,16 @@ class _AdminPaymentRecordsScreenState extends State<AdminPaymentRecordsScreen> {
                 const SizedBox(height: 20),
 
                 GridView.count(
-                  crossAxisCount: 2,
+                  crossAxisCount: MediaQuery.of(context).size.width >= 900
+                      ? 4
+                      : (MediaQuery.of(context).size.width >= 600 ? 2 : 2),
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   crossAxisSpacing: 12,
                   mainAxisSpacing: 12,
-                  childAspectRatio: 1.2,
+                  childAspectRatio: MediaQuery.of(context).size.width >= 900
+                      ? 1.6
+                      : (MediaQuery.of(context).size.width >= 600 ? 1.7 : 1.4),
                   children: [
                     _statCard('Total Payments', '$totalCount', AppColors.gold, Icons.receipt_long_outlined),
                     _statCard('Completed', '$completedCount', AppColors.success, Icons.check_circle_outline),
@@ -219,7 +223,7 @@ class _AdminPaymentRecordsScreenState extends State<AdminPaymentRecordsScreen> {
 
   Widget _statCard(String label, String value, Color color, IconData icon) {
     return Container(
-      padding: const EdgeInsets.all(14),
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
       decoration: BoxDecoration(
         color: AppColors.surface,
         borderRadius: BorderRadius.circular(12),
@@ -227,12 +231,29 @@ class _AdminPaymentRecordsScreenState extends State<AdminPaymentRecordsScreen> {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Icon(icon, color: color, size: 18),
-          const SizedBox(height: 8),
-          Text(label.toUpperCase(), style: const TextStyle(color: AppColors.lightGray, fontSize: 10)),
-          const SizedBox(height: 2),
-          Text(value, style: TextStyle(color: color, fontSize: 20, fontWeight: FontWeight.bold)),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Icon(icon, color: color, size: 18),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Text(
+                  label.toUpperCase(),
+                  textAlign: TextAlign.right,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(color: AppColors.lightGray, fontSize: 10, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 4),
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(value, style: TextStyle(color: color, fontSize: 20, fontWeight: FontWeight.bold)),
+          ),
         ],
       ),
     );

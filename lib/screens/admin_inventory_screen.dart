@@ -325,6 +325,10 @@ class _AdminInventoryScreenState extends State<AdminInventoryScreen> {
             final lowStock = items.where((i) => i.stockStatus == 'Low Stock').length;
             final outOfStock = items.where((i) => i.stockStatus == 'Out of Stock').length;
 
+            final screenWidth = MediaQuery.of(context).size.width;
+            int gridColumns = screenWidth >= 900 ? 4 : (screenWidth >= 600 ? 2 : 2);
+            double cardAspectRatio = screenWidth >= 900 ? 1.6 : (screenWidth >= 600 ? 1.7 : 1.4);
+
             return ListView(
               padding: const EdgeInsets.fromLTRB(16, 16, 16, 90),
               children: [
@@ -336,12 +340,12 @@ class _AdminInventoryScreenState extends State<AdminInventoryScreen> {
                 const SizedBox(height: 20),
 
                 GridView.count(
-                  crossAxisCount: 2,
+                  crossAxisCount: gridColumns,
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   crossAxisSpacing: 12,
                   mainAxisSpacing: 12,
-                  childAspectRatio: 1.1,
+                  childAspectRatio: cardAspectRatio,
                   children: [
                     StatCard(icon: Icons.inventory_2_outlined, label: 'Total Items', value: '$totalItems', caption: 'All parts'),
                     StatCard(
